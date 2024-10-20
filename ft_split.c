@@ -47,25 +47,25 @@ static int	counter(const char *s, char c)
 	return (count);
 }
 
-static char	*wordfiller(const char *s, char c)
+static char	*word_filler(const char *s, char c)
 {
-	int			wordcount;
-	int			i;
+	int		letter_count;
+	int		i;
 	char		*string;
 	const char	*copied;
 
 	i = 0;
-	wordcount = 0;
+	letter_count = 0;
 	copied = s;
 	while (*s != c && *s)
 	{
-		wordcount++;
+		letter_count++;
 		s++;
 	}
-	string = (char *) malloc (sizeof(char) * (wordcount + 1));
+	string = (char *) malloc (sizeof(char) * (letter_count + 1));
 	if (!string)
 		return (NULL);
-	while (i < wordcount)
+	while (i < letter_count)
 	{
 		string[i++] = *copied++;
 	}
@@ -75,22 +75,22 @@ static char	*wordfiller(const char *s, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**strings;
+	char		**strings;
 	int		i;
-	int		wordcount;
+	int		word_count;
 
 	i = 0;
-	wordcount = counter(s, c);
-	strings = (char **) malloc (sizeof(char *) * (wordcount + 1));
+	word_count = counter(s, c);
+	strings = (char **) malloc (sizeof(char *) * (word_count + 1));
 	if (!strings)
 		return (NULL);
-	while (i < wordcount)
+	while (i < word_count)
 	{
 		while (*s && *s == c)
 			s++;
 		if (*s)
 		{
-			strings[i] = wordfiller(s, c);
+			strings[i] = word_filler(s, c);
 			if (!strings[i])
 				return (delete (strings, i));
 			while (*s && *s != c)
